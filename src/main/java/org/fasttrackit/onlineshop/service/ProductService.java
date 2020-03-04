@@ -6,6 +6,7 @@ import org.fasttrackit.onlineshop.persistance.ProductRepositary;
 import org.fasttrackit.onlineshop.transfer.SaveProductRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,7 @@ public class ProductService {
         return productRepositary.save(product);
     }
 
-    public Product getPeoduct(long id) {
+    public Product getProduct(long id) {
         LOGGER.info("Retrieving product {}", id);
 
         // optional usage explained
@@ -52,5 +53,19 @@ public class ProductService {
         return productRepositary.findById(id)
                 // lambda exception
                 .orElseThrow(() -> new ResourceNotFoundException("Product " + id + " not found. "));
+    }
+
+    public Product updateProduct(long id, SaveProductRequest request) {
+        LOGGER.info("Updating product {}: {}", id, request);
+        Product product = getProduct(id);
+
+        BeanUtils.copyProperties(request, product);
+
+        return productRepositary.save(product);
+    }
+
+    public void deleteProduct(long id) {
+        LOGGER.info("Deleting product {}", id);
+        productRepositary.deleteById(id);
     }
 }
