@@ -1,8 +1,11 @@
 package org.fasttrackit.onlineshop;
 
+import com.fasterxml.classmate.types.ResolvedInterfaceType;
 import org.fasttrackit.onlineshop.domain.Product;
+import org.fasttrackit.onlineshop.exception.ResourceNotFoundException;
 import org.fasttrackit.onlineshop.service.ProductService;
 import org.fasttrackit.onlineshop.transfer.SaveProductRequest;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +26,11 @@ public class ProductServiceIntegrationTests {
 
     @Test
     void createProduct_whenValidRequest_thenProductIsCreated() {
+        createProduct();
+
+    }
+
+    private Product createProduct() {
         SaveProductRequest request = new SaveProductRequest();
         request.setName("Phone");
         request.setQuantity(100);
@@ -36,7 +44,9 @@ public class ProductServiceIntegrationTests {
         assertThat(product.getQuantity(), is(request.getQuantity()));
         assertThat(product.getPrice(), is(request.getPrice()));
 
+        return product;
     }
+
     @Test
     void createProduct_whenMissingName_thenExceptionIsThrown() {
         SaveProductRequest request = new SaveProductRequest();
@@ -52,6 +62,25 @@ public class ProductServiceIntegrationTests {
         }
 
     }
+    @Test
+    void getProduct_whenExistingProduct_thenReturnProduct() {
+        Product product = createProduct();
+
+        Product response = productService.getPeoduct(product.getId());
+
+        assertThat(response, notNullValue());
+        assertThat(product.getId(), greaterThan(0L));
+        assertThat(product.getName(), is(product.getName()));
+        assertThat(product.getPrice(), is(product.getPrice()));
+        assertThat(product.getQuantity(), is(product.getQuantity()));
+        assertThat(product.getDescription(), is(product.getDescription()));
+
+    }
+    @Test
+    void  getProduct_whenNonExistingProduct_thenThrowResourceNotFoundException() {
+        Assertions.assertThrows(ResourceNotFoundException.class,
+                () -> productService.getPeoduct(999999));
 
 
+    }
 }
