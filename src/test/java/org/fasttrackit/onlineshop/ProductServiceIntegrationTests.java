@@ -1,14 +1,12 @@
     package org.fasttrackit.onlineshop;
 
-    import com.fasterxml.classmate.types.ResolvedInterfaceType;
     import org.fasttrackit.onlineshop.domain.Product;
     import org.fasttrackit.onlineshop.exception.ResourceNotFoundException;
     import org.fasttrackit.onlineshop.service.ProductService;
-    import org.fasttrackit.onlineshop.transfer.SaveProductRequest;
+    import org.fasttrackit.onlineshop.transfer.product.SaveProductRequest;
     import org.junit.jupiter.api.Assertions;
     import org.junit.jupiter.api.Test;
     import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.beans.factory.annotation.ParameterResolutionDelegate;
     import org.springframework.boot.test.context.SpringBootTest;
     import org.springframework.transaction.TransactionSystemException;
 
