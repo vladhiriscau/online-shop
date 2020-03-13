@@ -37,7 +37,7 @@ public class ProductService {
         product.setQuantity(request.getQuantity());
         product.setImageUrl(request.getImageUrl());
 
-        return productRepositary.save(product);
+            return productRepositary.save(product);
     }
 
     public Product getProduct(long id) {
