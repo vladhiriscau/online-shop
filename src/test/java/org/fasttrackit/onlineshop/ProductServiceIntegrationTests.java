@@ -3,6 +3,7 @@
     import org.fasttrackit.onlineshop.domain.Product;
     import org.fasttrackit.onlineshop.exception.ResourceNotFoundException;
     import org.fasttrackit.onlineshop.service.ProductService;
+    import org.fasttrackit.onlineshop.steps.ProductTestsSteps;
     import org.fasttrackit.onlineshop.transfer.product.SaveProductRequest;
     import org.junit.jupiter.api.Assertions;
     import org.junit.jupiter.api.Test;
@@ -23,9 +24,11 @@
         @Autowired
         private ProductService productService;
 
+        private ProductTestsSteps
+
         @Test
         void createProduct_whenValidRequest_thenProductIsCreated() {
-            createProduct();
+            productTestSteps.createProduct();
 
         }
 
@@ -46,7 +49,7 @@
         }
         @Test
         void getProduct_whenExistingProduct_thenReturnProduct() {
-            Product product = createProduct();
+            Product product = productTestSteps.createProduct();
 
             Product response = productService.getProduct(product.getId());
 
@@ -66,7 +69,7 @@
         }
         @Test
         void updateProduct_whenValidRequest_thenReturnUpdateProduct() {
-            Product product = createProduct();
+            Product product = productTestSteps.createProduct();
 
             SaveProductRequest request = new SaveProductRequest();
             request.setName(product.getName() + " updated");
@@ -85,7 +88,7 @@
         }
         @Test
         void deleteProduct_whenExistingProduct_thenProductDoesNotExistAnymore() {
-            Product product = createProduct();
+            Product product = productTestSteps.createProduct();
 
             productService.deleteProduct(product.getId());
 
@@ -94,20 +97,4 @@
 
         }
 
-        private Product createProduct() {
-            SaveProductRequest request = new SaveProductRequest();
-            request.setName("Phone");
-            request.setQuantity(100);
-            request.setPrice(300.5);
-
-            Product product = productService.createProduct(request);
-
-            assertThat(product, notNullValue());
-            assertThat(product.getId(), greaterThan(0L));
-            assertThat(product.getName(), is(request.getName()));
-            assertThat(product.getQuantity(), is(request.getQuantity()));
-            assertThat(product.getPrice(), is(request.getPrice()));
-
-            return product;
-        }
     }
