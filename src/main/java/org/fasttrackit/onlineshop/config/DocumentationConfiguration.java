@@ -8,7 +8,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-// singleton (design-pattern) - all beans are singletons
+//singleton (design pattern) - all beans are singletons
 @Configuration
 @EnableSwagger2
 public class DocumentationConfiguration {
@@ -20,5 +20,4 @@ public class DocumentationConfiguration {
                 .paths(PathSelectors.any())
                 .build();
     }
-
 }

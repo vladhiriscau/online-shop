@@ -12,7 +12,9 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @NotNull
-    private String FirstName;
+    private String firstName;
+    @NotNull
+    private String lastName;
 
     public long getId() {
         return id;
@@ -23,24 +25,27 @@ public class Customer {
     }
 
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
-        FirstName = firstName;
+        this.firstName = firstName;
     }
 
-    public String getLasttName() {
-        return lasttName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLasttName(String lasttName) {
-        this.lasttName = lasttName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    @NotNull
-    private String lasttName;
-
-
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
+    }
 }
-

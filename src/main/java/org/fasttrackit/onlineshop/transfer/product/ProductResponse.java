@@ -2,15 +2,22 @@ package org.fasttrackit.onlineshop.transfer.product;
 
 import javax.validation.constraints.NotNull;
 
-public class SaveProductRequest {
-    @NotNull
+public class ProductResponse {
+
+    private long id;
     private String name;
     private String description;
-    @NotNull
-    private Double price;
-    @NotNull
-    private Integer quantity;
+    private double price;
+    private int quantity;
     private String imageUrl;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -28,19 +35,19 @@ public class SaveProductRequest {
         this.description = description;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -54,8 +61,9 @@ public class SaveProductRequest {
 
     @Override
     public String toString() {
-        return "SaveProductRequest{" +
-                "name='" + name + '\'' +
+        return "ProductResponse{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +

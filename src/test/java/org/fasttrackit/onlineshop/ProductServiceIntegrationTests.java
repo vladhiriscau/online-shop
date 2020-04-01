@@ -26,8 +26,8 @@
 
         private ProductTestsSteps
 
-        @Test
-        void createProduct_whenValidRequest_thenProductIsCreated() {
+        public void createProduct_whenValidRequest_thenProductIsCreated() {
+            ProductTestsSteps productTestSteps = null;
             productTestSteps.createProduct();
 
         }
@@ -49,6 +49,7 @@
         }
         @Test
         void getProduct_whenExistingProduct_thenReturnProduct() {
+            ProductTestsSteps productTestSteps = null;
             Product product = productTestSteps.createProduct();
 
             Product response = productService.getProduct(product.getId());
@@ -69,6 +70,7 @@
         }
         @Test
         void updateProduct_whenValidRequest_thenReturnUpdateProduct() {
+            ProductTestsSteps productTestSteps = null;
             Product product = productTestSteps.createProduct();
 
             SaveProductRequest request = new SaveProductRequest();
@@ -88,6 +90,7 @@
         }
         @Test
         void deleteProduct_whenExistingProduct_thenProductDoesNotExistAnymore() {
+            ProductTestsSteps productTestSteps = null;
             Product product = productTestSteps.createProduct();
 
             productService.deleteProduct(product.getId());
